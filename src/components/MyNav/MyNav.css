@@ -1,0 +1,26 @@
+/* link navabar & theme class*/
+.color-light {
+    color: black;
+}
+
+.color-hover-light:hover {
+    border-bottom: solid 2px #212121;
+    padding-bottom: 0.3em;   
+    color: black; 
+}
+
+.color-dark {
+    color: white;
+}
+
+.color-hover-dark:hover {
+    border-bottom: solid 2px #15F5BA;
+    padding-bottom: 0.3em; 
+    color: white;   
+}
+
+/* input di ricerca*/
+.search-field-style {
+    width: 40%;
+    margin-left: auto;
+}

@@ -1,0 +1,14 @@
+.welcome-message {
+    background-color: #15f5b9;
+    border: none;
+    color: white;
+    width: 85%;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.position-up {
+    position: absolute;
+    top: 8%;
+    z-index: 2;
+    width: 100%;
+}

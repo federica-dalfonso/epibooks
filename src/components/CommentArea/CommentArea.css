@@ -1,0 +1,100 @@
+/*commentArea*/
+.comment-list-box {
+    align-items: start;
+    height: 250px;
+    padding: 2em;
+    overflow-y: auto;
+}
+
+.single-comment-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.red-border {
+    border: solid 1px #E72929;
+}
+
+/*SingleComment*/
+.single-comment-image {
+    width: 2em;
+    height: 2em;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.comment-span-style span:first-of-type {
+    font-size: 12pt;
+    font-style: oblique;
+}
+
+.comment-span-style span:last-of-type {
+    font-size: 10pt;
+}
+
+.no-comment-yet {
+    font-size: 12pt;
+}
+
+/*bottoni modifica ed eliminazione commento*/
+.delete-comment-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.5em;
+    border-radius: 10%;
+    background-color: #E72929;
+    border: none;
+}
+
+.modify-comment-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.5em;
+    border-radius: 10%;
+    background-color: #008DDA;
+    border: none;
+}
+
+/*addComment*/
+.form-label {
+    font-size: 10pt;
+}
+
+.add-comment-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.font-color-light {
+    color: white;
+}
+
+.font-color-dark {
+    color: #212121;
+}
+
+/*SCROLLBAR*/
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: #F8F9FA;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #15f5b9a8;
+}
+  
+
+::-webkit-scrollbar-thumb:hover {
+    background: #15f5b9;
+}

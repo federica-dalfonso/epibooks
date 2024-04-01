@@ -1,0 +1,71 @@
+/*CARDS*/
+.custom-card {
+    width: 95%;
+}
+
+.custom-card .card-img-top {
+height: 400px;
+object-fit: scale-down;
+}
+  
+.custom-card .card-body {
+    height: 180px;
+    text-align: center;
+}
+  
+.card-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.subtitle-style {
+    font-size: 9pt;
+    color: #15F5BA;
+}
+
+.size-title {
+    font-size: 13pt;
+}
+
+.size-price {
+    font-size: 11pt;
+}
+
+.ellipsis {
+    display:-webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}  
+
+.cursor-hover:hover {
+    cursor: pointer;
+}
+
+/*bordo e sfondo card - theme*/
+
+.back-color-light {
+    background-color: #F8F9FA;
+    border: none;
+}
+
+.back-color-dark {
+    background-color: #212529;
+    border: none;
+}
+
+.red-border {
+    border: solid 3px #D80032;
+}
+/*link*/
+.link-style {
+    color: #15F5BA;
+    text-decoration:none;
+}
+
+.link-style:hover {
+    border-bottom: solid 1px #15F5BA;
+    padding-bottom: 0.5em;
+}

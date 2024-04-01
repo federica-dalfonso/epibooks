@@ -1,0 +1,9 @@
+.bg-light {
+    background-color: white;
+    color: black;
+}
+
+.bg-dark {
+    background-color: #3D3B40;
+    color: white;
+}
