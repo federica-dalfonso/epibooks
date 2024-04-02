@@ -5,7 +5,7 @@ import { ThemeContext } from "../../context/ThemeContextProvider";
 import { useState, useEffect } from "react";
 
 
-export default function AddComment ({asin, comments, setComments, newComment, setNewComment}) {
+export default function AddComment ({asin, onCommentAdded}) {
     //tema     
     const { theme } = useContext(ThemeContext);
     //tema dei font:
@@ -24,65 +24,79 @@ export default function AddComment ({asin, comments, setComments, newComment, se
         return () => clearTimeout(timeout);
     }, [showSuccessAlert, showErrorAlert]);
 
+    const [comment, setComment] = useState({
+        comment: '',
+        rate: 1,
+        elementId: null,
+    })
+
+    useEffect(() => {
+    setComment((c) => ({
+        ...c,
+        elementId: asin,
+    }))
+    }, [asin])
+
     //endpoint POST:
     const ENDPOINT_post = "https://striveschool-api.herokuapp.com/api/comments";
     //autorizzazione 
     const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ0N2NkNTljNDM3MDAwMTkzYzM1ODUiLCJpYXQiOjE3MTE1Njk0MDIsImV4cCI6MTcxMjc3OTAwMn0.9Zx0zJl5P8pMv6knkTcWL1Ijace_4y3zC7SQixMzx9o";
 
-    const handleNewComment = async (event) => {
-        event.preventDefault();
-        setNewComment({
-            comment: "",
-            rate: "",
-            elementId: asin,
-        });
-        // console.log(newComment);
-        if (newComment.comment && newComment.rate) {
-            try 
+    const sendComment = async (e) => {
+        e.preventDefault()
+        try {
+          let response = await fetch(
+            ENDPOINT_post,
             {
-            const response = await fetch(ENDPOINT_post, {
-                method: 'POST',
-                body: JSON.stringify(newComment),
-                headers: {
-                    'Content-type': 'application/json',
-                    Authorization: key,
-                },
-            });    
-            if (response.ok) {
-                setShowSuccessAlert(true);
-                // Aggiungo il nuovo commento alla lista dei commenti:
-                setComments((prevComments) => [...prevComments, newComment]);
-            } else {
-                setShowErrorAlert(true);
-                throw new Error("Qualcosa è andato storto durante la tua richiesta POST.");
-            }} 
-            catch (error) 
-            {
-                console.error("Si è verificato un problema con la tua richiesta:", error);
+              method: 'POST',
+              body: JSON.stringify(comment),
+              headers: {
+                'Content-type': 'application/json',
+                Authorization: key,
+              },
             }
-        } 
-    };
+          )
+          if (response.ok) {
+            setShowSuccessAlert(true);
+            setComment({
+              comment: '',
+              rate: 1,
+              elementId: null,
+            })
+            onCommentAdded()
+          } else {
+            setShowErrorAlert(true);
+            console.error('Qualcosa è andato storto!')
+          }
+        } catch (error) {
+          console.log("C'è stato un errore con la tua richiesta:", error)
+        }
+      }
 
     return (
         <>
-        <Form className="w-100 px-5 py-2" onSubmit={handleNewComment}>
+        <Form className="w-100 px-5 py-2" onSubmit={sendComment}>
             <Form.Group className="mb-3" controlId="controlComment">
                 <Form.Label className={addCommentTheme}>Scrivi qui il tuo commento sul libro</Form.Label>
-                <Form.Control type="textarea" rows={2}
-                value={newComment.comment} onChange={(e) => {
-                    setNewComment({
-                        ...newComment,
-                        comment: e.target.value, 
-                    })
-                }}/>
+                <Form.Control type="text" 
+                value={comment.comment}
+                onChange={(e) =>
+                  setComment({
+                    ...comment,
+                    comment: e.target.value,
+                  })
+                }/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="controlRate">
-                <Form.Select as="selection" max={5}
-                value={newComment.rate} onChange={(e) => {
-                    setNewComment({
-                    ...newComment,
+                <Form.Select as="select" max={5}
+                value={comment.rate}
+                onChange={(e) =>
+                  setComment({
+                    ...comment,
                     rate: e.target.value,
-                })}}>
+                  })
+                }
+                >
                 <option>Seleziona un voto da 1 a 5</option>
                 <option value="1">1</option> 
                 <option value="2">2</option> 

@@ -1,15 +1,15 @@
 import SingleComment from './SingleComment.jsx';
+import { useEffect, useState } from 'react';
 
-export default function CommentList ({ commentToShow }) {
-    //gestiamo anche il caso in cui l'array non contenga ancora nessun commento!
-    // console.log(commentToShow);
+export default function CommentList ({ commentToShow, onCommentDeleted }) {
+    //poniamo anche il caso in cui l'array non contenga ancora nessun commento:
     return (
         <div className='comment-list-box'>
             {commentToShow.length === 0 ? (
                 <p className='no-comment-yet'>Nessuna recensione presente</p>
             ) : (
                 commentToShow.map((comment, index) => (
-                    <SingleComment key={index} userComment={comment}/>
+                    <SingleComment key={index} userComment={comment} onCommentDeleted={onCommentDeleted}/>
                 ))
             )}
         </div>

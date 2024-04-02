@@ -9,11 +9,8 @@ export default function CommentArea ({ asin }) {
     // stati per gestione commenti:
     const [comments, setComments] = useState([]);
 
-    const [newComment, setNewComment] = useState({
-        comment: "",
-        rate: "",
-        elementId: asin,
-    });
+    // stato per gestire l'aggiornamento dell'array di commenti da visualizzare:
+    const [refreshComments, setRefreshComments] = useState(false);
 
     //gestione stato spinner di caricamento: 
     const [loading, setLoading] = useState(true);
@@ -27,35 +24,32 @@ export default function CommentArea ({ asin }) {
     useEffect(() => {
         const getComments = async () => {
             try {
-            const response = await fetch(ENDPOINT_get, {
+            const response = await fetch(ENDPOINT_get, 
+                {
                 headers: {
                     Authorization: key,
                 },
                 }
             )
             if (response.ok) {
-                const comments = await response.json();
+                let comments = await response.json();
                 setComments(comments);
-                // console.log(comments);
                 setLoading(false);
             } else {
-                console.log('error')
-            }
-            } catch (error) {
-            console.log(error)
+                alert("Errore nella richiesta dei dati")
+            }} 
+            catch (error) {
+                console.error("Errore nella richiesta:", error);
             }
         }
         if (asin) {
             getComments();
         }
-    }, [asin], [comments]);   
-
-    //endpoint delete:
-    // const ENDPOINT_delete = `https://striveschool-api.herokuapp.com/api/comments/${asin}`; con l'ID del commento
-
+    }, [asin, refreshComments]);   
+    
     return (
         <>
-        <Container className='my-3 px-5'>
+        <Container className='box-comments'>
             <Row className='g-3'>
                 { loading ? (
                     <Col sm={12} className='d-flex justify-content-center align-items-center'>
@@ -63,12 +57,11 @@ export default function CommentArea ({ asin }) {
                     </Col>
                 ) : (
                     <>
-                    <Col sm={12} md={6} lg={6} className=''>     
-                        <CommentList commentToShow={comments}/>                       
+                    <Col sm={12} md={6} lg={6}>     
+                        <CommentList commentToShow={comments} onCommentDeleted={() => setRefreshComments(!refreshComments)}/>                       
                     </Col>
                     <Col sm={12} md={6} lg={6} className='add-comment-box'>
-                        <AddComment asin={asin} comments={comments} setComments={setComments}
-                        newComment={newComment} setNewComment={setNewComment}/>
+                        <AddComment asin={asin} onCommentAdded={() => setRefreshComments(!refreshComments)}/>
                     </Col> 
                     </>                    
                 )}

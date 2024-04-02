@@ -11,8 +11,7 @@
 }
 
 .show-more-light:hover {
-    border-bottom: 1px solid white;
-    padding-bottom: 0.5em;
+    color: #15f5b9a8;
 }
 
 .show-more-dark {
@@ -23,6 +22,5 @@
 }
 
 .show-more-dark:hover {
-    border-bottom: 1px solid #212121;
-    padding-bottom: 0.5em;
+    color: #15f5b9a8;
 }

@@ -41,7 +41,7 @@ export default function MyNav ({ text, onSearchChange}) {
           </Navbar.Brand>
 
           <Nav className="pe-2">
-            <Nav.Link href="#" className={linkTheme}>Home</Nav.Link>
+            <Nav.Link href="/" className={linkTheme}>Home</Nav.Link>
             <Nav.Link href="#" className={linkTheme}>About</Nav.Link>
             <Nav.Link href="#" className={linkTheme}>Browse</Nav.Link>
           </Nav>
@@ -66,7 +66,7 @@ export default function MyNav ({ text, onSearchChange}) {
           </Navbar.Brand>
 
           <Nav className="pe-2">
-            <Nav.Link href="#" className={linkTheme}>Home</Nav.Link>
+            <Nav.Link href="/" className={linkTheme}>Home</Nav.Link>
             <Nav.Link href="#" className={linkTheme}>About</Nav.Link>
             <Nav.Link href="#" className={linkTheme}>Browse</Nav.Link>
           </Nav>

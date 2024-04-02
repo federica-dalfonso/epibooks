@@ -1,7 +1,12 @@
 /*commentArea*/
+.box-comments {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    margin-bottom: 4em;
+}
+
 .comment-list-box {
     align-items: start;
-    height: 250px;
+    height: 200px;
     padding: 2em;
     overflow-y: auto;
 }
@@ -36,6 +41,7 @@
 
 .no-comment-yet {
     font-size: 12pt;
+    color: grey;
 }
 
 /*bottoni modifica ed eliminazione commento*/
@@ -67,6 +73,7 @@
 }
 
 .add-comment-box {
+    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
