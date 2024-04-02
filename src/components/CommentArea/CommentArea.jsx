@@ -1,36 +1,29 @@
 import './CommentArea.css';
 import CommentList from './CommentList.jsx';
 import AddComment from './AddComment.jsx';
-import { Container, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import MySpinner from './MySpinner.jsx';
 
 export default function CommentArea ({ asin }) {  
-
-    //gestione commenti:
+    // stati per gestione commenti:
     const [comments, setComments] = useState([]);
-    //caricamento commenti per spinner: 
-    const [loading, setLoading] = useState(true);
-    
-    // gestione alert:
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
-    const hideAlerts = () => {
-        setShowSuccessAlert(false);
-        setShowErrorAlert(false);
-    };
-    useEffect(() => {
-        const timeout = setTimeout(hideAlerts, 2000);
-        return () => clearTimeout(timeout);
-    }, [showSuccessAlert, showErrorAlert]);
 
-    //autorizzazione 
-    const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ0N2NkNTljNDM3MDAwMTkzYzM1ODUiLCJpYXQiOjE3MTE1Njk0MDIsImV4cCI6MTcxMjc3OTAwMn0.9Zx0zJl5P8pMv6knkTcWL1Ijace_4y3zC7SQixMzx9o";
-    
+    const [newComment, setNewComment] = useState({
+        comment: "",
+        rate: "",
+        elementId: asin,
+    });
+
+    //gestione stato spinner di caricamento: 
+    const [loading, setLoading] = useState(true);
+
+    //autorizzazione:
+    const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ0N2NkNTljNDM3MDAwMTkzYzM1ODUiLCJpYXQiOjE3MTE1Njk0MDIsImV4cCI6MTcxMjc3OTAwMn0.9Zx0zJl5P8pMv6knkTcWL1Ijace_4y3zC7SQixMzx9o";   
     //endpoint GET: 
     const ENDPOINT_get = `https://striveschool-api.herokuapp.com/api/comments/${asin}`
 
-    //fetch per ottenere i commenti:
+    //fetch get dei commenti:
     useEffect(() => {
         const getComments = async () => {
             try {
@@ -57,32 +50,6 @@ export default function CommentArea ({ asin }) {
         }
     }, [asin], [comments]);   
 
-    //endpoint POST:
-    const ENDPOINT_post = "https://striveschool-api.herokuapp.com/api/comments";
-
-    //fetch per inviare il nuovo commento: 
-    const postComments = async (newComment) => {
-        try {
-            const response = await fetch(ENDPOINT_post, {
-                method: 'POST',
-                body: JSON.stringify(newComment),
-                headers: {
-                    'Content-type': 'application/json',
-                    Authorization: key,
-                },
-            })
-            if (response.ok) {
-                setShowSuccessAlert(true);
-                setComments((prevComments) => [...prevComments, newComment]);
-            } else {
-                setShowErrorAlert(true);
-                throw new Error('Qualcosa è andato storto');
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     //endpoint delete:
     // const ENDPOINT_delete = `https://striveschool-api.herokuapp.com/api/comments/${asin}`; con l'ID del commento
 
@@ -100,9 +67,8 @@ export default function CommentArea ({ asin }) {
                         <CommentList commentToShow={comments}/>                       
                     </Col>
                     <Col sm={12} md={6} lg={6} className='add-comment-box'>
-                        <AddComment asin={asin} postComments={postComments}/>
-                        {showSuccessAlert && <Alert variant="success" className='text-center'>Il tuo commento è stato aggiunto!</Alert>}
-                        {showErrorAlert && <Alert variant="danger" className='text-center'>C'è un errore...controlla il form e riprova!</Alert>}                    
+                        <AddComment asin={asin} comments={comments} setComments={setComments}
+                        newComment={newComment} setNewComment={setNewComment}/>
                     </Col> 
                     </>                    
                 )}
