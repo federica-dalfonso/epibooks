@@ -17,10 +17,10 @@ export default function AllBooks ({ results }) {
             <Container className={`mt-5 ${containerTheme}`}>       
                     <Row>                                                                
                         {/*passo come prop l'ìntero libro, poi lo destrutturo nel componente*/}
-                        {results.map((book) => (
+                        {results && results.map((book) => {
                             <SingleBook key={book.asin} book={book} 
                             selected={selected} setSelected={setSelected}/>
-                        ))}                                                    
+                        })}                                                
                     </Row>                        
             </Container>  
         </>

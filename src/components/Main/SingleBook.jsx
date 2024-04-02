@@ -21,7 +21,7 @@ export default function SingleBook ( {book, selected, setSelected} ) {
         <Col sm={12} md={6} lg={3} className='g-2'>
             <Card className={`custom-card cursor-hover ${cardTheme} ${selected === book.asin ? 'red-border' : 'none'}`}
             onClick={() => setSelected(book.asin)}>
-                <Card.Img variant="top" src={img} className="img-fluid" />
+                <Card.Img variant="top" src={img} className="img-fluid" alt="copertina_libro"/>
                 <Card.Body>
                     <Card.Subtitle className="text-uppercase subtitle-style py-2">{category}</Card.Subtitle>
                     <Card.Title className={`ellipsis size-title text-uppercase mb-4 ${textTheme}`}>{title}</Card.Title>                  
