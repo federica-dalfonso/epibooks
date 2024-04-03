@@ -44,7 +44,7 @@
     color: grey;
 }
 
-/*bottoni modifica ed eliminazione commento*/
+/*bottone eliminazione commento*/
 .delete-comment-button {
     display: flex;
     justify-content: center;
@@ -56,16 +56,13 @@
     border: none;
 }
 
-.modify-comment-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding: 0.5em;
-    border-radius: 10%;
-    background-color: #008DDA;
-    border: none;
+.delete-comment-button:hover {
+    background-color: #E72929; 
 }
+
+/*modale conferma*/
+
+
 
 /*addComment*/
 .form-label {

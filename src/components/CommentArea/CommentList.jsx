@@ -1,5 +1,4 @@
 import SingleComment from './SingleComment.jsx';
-import { useEffect, useState } from 'react';
 
 export default function CommentList ({ commentToShow, onCommentDeleted }) {
     //poniamo anche il caso in cui l'array non contenga ancora nessun commento:

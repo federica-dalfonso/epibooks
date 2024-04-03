@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from "../../context/ThemeContextProvider";
-import { SlPencil, SlTrash } from "react-icons/sl";
-import { Alert, Modal, Button } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { useState, useEffect } from 'react';
+import ModalConfirm from './ModalConfirm';
 
 
 export default function SingleComment ({userComment, onCommentDeleted}) {
@@ -73,20 +73,8 @@ export default function SingleComment ({userComment, onCommentDeleted}) {
             </div>            
             {userComment && 
             <div className='d-flex gap-2'>
-              <Button className="delete-comment-button" onClick={handleShow}>
-                Elimina
-              </Button>     
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Body>Stai per cancellare questo commento, confermi?</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Annulla
-                  </Button>
-                  <Button variant="primary" onClick={() => deleteComment(userComment._id)}>
-                    Conferma
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+              <ModalConfirm confirm={()=> deleteComment(userComment._id)}
+              show={show} modalClose={handleClose} modalShow={handleShow}/>
             </div>} 
         </div>
         {showSuccessAlert && <Alert variant="warning" className='text-center'>Il tuo commento è stato eliminato!</Alert>}

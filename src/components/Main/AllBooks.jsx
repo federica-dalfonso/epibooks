@@ -18,7 +18,7 @@ export default function AllBooks ({ results }) {
                     <Row>                                                                
                         {/*passo come prop l'ìntero libro, poi lo destrutturo nel componente*/}
                         {results && results.map((book) => {
-                            <SingleBook key={book.asin} book={book} 
+                            return <SingleBook key={book.asin} book={book} 
                             selected={selected} setSelected={setSelected}/>
                         })}                                                
                     </Row>                        
