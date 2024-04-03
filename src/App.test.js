@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import WelcomeAlert from "./components/WelcomeAlert/WelcomeAlert";
-import AllBooks from './components/Main/AllBooks';
-import jsonData from "./data/fantasy.json";
+import CommentArea from "./components/CommentArea/CommentArea";
 import { ThemeContext } from './context/ThemeContextProvider';
 
 test("viene montato correttamente il componente WelcomeAlert", () => {
@@ -12,16 +11,15 @@ test("viene montato correttamente il componente WelcomeAlert", () => {
     expect(welcomeMessage).toBeInTheDocument();
 }); 
 
-// test("numero cards bootstrap uguale a libri del json utilizzato", async () => {
-//     render (
-//         <ThemeContext.Provider value={{ theme: 'light' }}>
-//             <AllBooks/>
-//         </ThemeContext.Provider>
-//         );
+test ("il componente comment area viene renderizzato correttamente", () => {
+    render(<ThemeContext.Provider value={{ theme: 'light' }}>
+            <CommentArea/>
+        </ThemeContext.Provider>
+    );
 
-//         let numberOfCards;
-//         await waitFor(() => {
-//             numberOfCards = screen.getAllByTestId("book-card").length;
-//             expect(numberOfCards).toBe(jsonData.length);
-//         });
-// })
+    const commentArea = screen.getByTestId("comment-area");
+    expect(commentArea).toBeInTheDocument();
+
+})
+
+

@@ -49,7 +49,7 @@ export default function CommentArea ({ asin }) {
     
     return (
         <>
-        <Container className='box-comments'>
+        <Container className='box-comments' data-testid="comment-area">
             <Row className='g-3'>
                 { loading ? (
                     <Col sm={12} className='d-flex justify-content-center align-items-center'>
